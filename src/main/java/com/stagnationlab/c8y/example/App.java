@@ -9,19 +9,22 @@ import com.cumulocity.sdk.client.inventory.InventoryApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+
 public class App
 {
-    public static final Logger log = LoggerFactory.getLogger(App.class);
+    private static final Logger log = LoggerFactory.getLogger(App.class);
 
-    public static void main( String[] args )
-    {
-        log.info("starting application");
+    private App() throws IOException {
+        Config config = Config.loadOrCreateConfig();
+
+        log.info("starting application, tenant: " + config.tenant + ", username: " + config.username);
 
         Platform platform = new PlatformImpl(
-                "http://telia.cumulocity.com",
+                "http://" + config.tenant + ".cumulocity.com",
                 new CumulocityCredentials(
-                        "priit.kallas@telia.ee",
-                        "purgisupp"
+                        config.username,
+                        config.password
                 )
         );
 
@@ -32,6 +35,12 @@ public class App
         managedObjectRepresentation.set(new IsDevice());
         managedObjectRepresentation = inventoryApi.create(managedObjectRepresentation);
 
-        log.info("URL: " + managedObjectRepresentation.getSelf());
+        log.info("Created managed object URL: " + managedObjectRepresentation.getSelf());
+
+        System.exit(0);
+    }
+
+    public static void main( String[] args ) throws IOException {
+        new App();
     }
 }
