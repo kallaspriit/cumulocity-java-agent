@@ -1,4 +1,4 @@
-package com.stagnationlab.c8y.example;
+package com.stagnationlab.c8y.agent;
 
 import c8y.IsDevice;
 import com.cumulocity.model.authentication.CumulocityCredentials;
