@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+group 'com.stagnationlab.cumulocity.agent'
+version '1.0.0'
+
+//noinspection GroovyUnusedAssignment
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url "http://download.cumulocity.com/maven/repository"
+    }
+}
+
+dependencies {
+    // cumulocity
+    compile group: 'com.nsn.cumulocity.clients-java', name: 'java-client', version: '7.28.0'
+    compile group: 'com.nsn.cumulocity.model', name: 'device-capability-model', version: '7.28.0'
+
+    // logging
+    //compile group: 'org.slf4j', name: 'slf4j-simple', version: 'latest.release'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: 'latest.release'
+
+    // testing
+    testCompile group: 'junit', name: 'junit', version: 'latest.release'
+}
