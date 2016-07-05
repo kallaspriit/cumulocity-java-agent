@@ -10,7 +10,7 @@ version '1.0.0'
 sourceCompatibility = 1.8
 
 //noinspection GroovyUnusedAssignment
-mainClassName = "com.stagnationlab.c8y.example.App"
+mainClassName = "com.stagnationlab.c8y.agent.App"
 
 repositories {
     mavenCentral()
